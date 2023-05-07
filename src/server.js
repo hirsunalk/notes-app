@@ -1,7 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
 // mengimpor dotenv dan menjalankan konfigurasinya
-// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 
 const Hapi = require('@hapi/hapi');
@@ -27,6 +24,7 @@ const init = async () => {
   const notesService = new NotesService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
+
   const server = Hapi.server({
     port: process.env.PORT,
     host: process.env.HOST,
@@ -36,7 +34,8 @@ const init = async () => {
       },
     },
   });
-    // registrasi plugin eksternal
+
+  // registrasi plugin eksternal
   await server.register([
     {
       plugin: Jwt,
@@ -85,6 +84,7 @@ const init = async () => {
       },
     },
   ]);
+
   await server.start();
   console.log(`Server berjalan pada ${server.info.uri}`);
 };
